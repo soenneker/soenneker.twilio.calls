@@ -2,8 +2,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Soenneker.Fixtures.Unit;
-using Soenneker.Twilio.Calls.Registrars;
 using Soenneker.Utils.Test;
+using Soenneker.Twilio.Calls.Registrars;
 
 namespace Soenneker.Twilio.Calls.Tests;
 
