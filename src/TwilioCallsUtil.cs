@@ -23,7 +23,8 @@ public class TwilioCallsUtil: ITwilioCallsUtil
         _twilioClientUtil = twilioClientUtil;
     }
 
-    public async ValueTask<List<CallResource>> GetAllCallsForNumber(string phoneNumber, DateTime? startTimeAfter = null, DateTime? startTimeBefore = null, CancellationToken cancellationToken = default)
+    public async ValueTask<List<CallResource>> GetAllCallsForNumber(string phoneNumber, DateTime? startTimeAfter = null, DateTime? startTimeBefore = null, 
+        CancellationToken cancellationToken = default)
     {
         await _twilioClientUtil.Init(cancellationToken).NoSync();
 
@@ -35,7 +36,8 @@ public class TwilioCallsUtil: ITwilioCallsUtil
         return result.ToList();
     }
 
-    public async ValueTask<Dictionary<string, List<CallResource>>> GetAllCallsForNumbersSplitByNumber(IEnumerable<string> phoneNumbers, DateTime? startTimeAfter = null, DateTime? startTimeBefore = null, CancellationToken cancellationToken = default)
+    public async ValueTask<Dictionary<string, List<CallResource>>> GetAllCallsForNumbersSplitByNumber(IEnumerable<string> phoneNumbers, DateTime? startTimeAfter = null, 
+        DateTime? startTimeBefore = null, CancellationToken cancellationToken = default)
     {
         await _twilioClientUtil.Init(cancellationToken).NoSync();
 
