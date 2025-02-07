@@ -13,18 +13,22 @@ public static class TwilioCallsUtilRegistrar
     /// <summary>
     /// Adds <see cref="ITwilioCallsUtil"/> as a singleton service. <para/>
     /// </summary>
-    public static void AddTwilioCallsUtilAsSingleton(this IServiceCollection services)
+    public static IServiceCollection AddTwilioCallsUtilAsSingleton(this IServiceCollection services)
     {
         services.AddTwilioClientUtilAsSingleton();
         services.TryAddSingleton<ITwilioCallsUtil, TwilioCallsUtil>();
+
+        return services;
     }
 
     /// <summary>
     /// Adds <see cref="ITwilioCallsUtil"/> as a scoped service. <para/>
     /// </summary>
-    public static void AddTwilioCallsUtilAsScoped(this IServiceCollection services)
+    public static IServiceCollection AddTwilioCallsUtilAsScoped(this IServiceCollection services)
     {
         services.AddTwilioClientUtilAsSingleton();
         services.TryAddScoped<ITwilioCallsUtil, TwilioCallsUtil>();
+
+        return services;
     }
 }
