@@ -14,7 +14,7 @@ using System.Threading;
 namespace Soenneker.Twilio.Calls;
 
 /// <inheritdoc cref="ITwilioCallsUtil"/>
-public class TwilioCallsUtil: ITwilioCallsUtil
+public sealed class TwilioCallsUtil: ITwilioCallsUtil
 {
     private readonly ITwilioClientUtil _twilioClientUtil;
 
