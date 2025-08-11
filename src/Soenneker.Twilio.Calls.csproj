@@ -42,7 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.Task" Version="3.0.103" />
+        <PackageReference Include="Soenneker.Extensions.Task" Version="3.0.104" />
         <PackageReference Include="Soenneker.Twilio.Client" Version="3.0.912" />
     </ItemGroup>
 </Project>
