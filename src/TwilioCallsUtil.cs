@@ -23,21 +23,21 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
         _twilioClientUtil = twilioClientUtil;
     }
 
-    public async ValueTask<List<CallResource>> GetAllCallsForNumber(string phoneNumber, DateTime? startTimeAfter = null, DateTime? startTimeBefore = null, 
+    public async ValueTask<List<CallResource>> GetAllCallsForNumber(string phoneNumber, DateTimeOffset? startTimeAfter = null, DateTimeOffset? startTimeBefore = null, 
         CancellationToken cancellationToken = default)
     {
         await _twilioClientUtil.Init(cancellationToken).NoSync();
 
         ResourceSet<CallResource>? result = await CallResource.ReadAsync(
             to: new PhoneNumber(phoneNumber),
-            startTimeAfter: startTimeAfter,
-            startTimeBefore: startTimeBefore).NoSync();
+            startTimeAfter: startTimeAfter?.UtcDateTime,
+            startTimeBefore: startTimeBefore?.UtcDateTime).NoSync();
 
         return result.ToList();
     }
 
-    public async ValueTask<Dictionary<string, List<CallResource>>> GetAllCallsForNumbersSplitByNumber(IEnumerable<string> phoneNumbers, DateTime? startTimeAfter = null, 
-        DateTime? startTimeBefore = null, CancellationToken cancellationToken = default)
+    public async ValueTask<Dictionary<string, List<CallResource>>> GetAllCallsForNumbersSplitByNumber(IEnumerable<string> phoneNumbers, DateTimeOffset? startTimeAfter = null, 
+        DateTimeOffset? startTimeBefore = null, CancellationToken cancellationToken = default)
     {
         await _twilioClientUtil.Init(cancellationToken).NoSync();
 
@@ -47,8 +47,8 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
         {
             ResourceSet<CallResource>? calls = await CallResource.ReadAsync(
                 to: new PhoneNumber(phoneNumber),
-                startTimeAfter: startTimeAfter,
-                startTimeBefore: startTimeBefore).NoSync();
+                startTimeAfter: startTimeAfter?.UtcDateTime,
+                startTimeBefore: startTimeBefore?.UtcDateTime).NoSync();
 
             callsByNumber[phoneNumber] = calls.ToList();
         }
