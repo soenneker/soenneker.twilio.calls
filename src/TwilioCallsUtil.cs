@@ -8,7 +8,6 @@ using Twilio.Base;
 using Soenneker.Twilio.Client.Abstract;
 using Soenneker.Extensions.ValueTask;
 using Soenneker.Extensions.Task;
-using System.Linq;
 using System.Threading;
 
 namespace Soenneker.Twilio.Calls;
@@ -33,7 +32,14 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
             startTimeAfter: startTimeAfter?.UtcDateTime,
             startTimeBefore: startTimeBefore?.UtcDateTime).NoSync();
 
-        return result.ToList();
+        if (result is null)
+            return [];
+
+        var list = new List<CallResource>();
+        foreach (CallResource c in result)
+            list.Add(c);
+
+        return list;
     }
 
     public async ValueTask<Dictionary<string, List<CallResource>>> GetAllCallsForNumbersSplitByNumber(IEnumerable<string> phoneNumbers, DateTimeOffset? startTimeAfter = null, 
@@ -50,7 +56,17 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
                 startTimeAfter: startTimeAfter?.UtcDateTime,
                 startTimeBefore: startTimeBefore?.UtcDateTime).NoSync();
 
-            callsByNumber[phoneNumber] = calls.ToList();
+            if (calls is null)
+            {
+                callsByNumber[phoneNumber] = [];
+                continue;
+            }
+
+            var list = new List<CallResource>();
+            foreach (CallResource c in calls)
+                list.Add(c);
+
+            callsByNumber[phoneNumber] = list;
         }
 
         return callsByNumber;
