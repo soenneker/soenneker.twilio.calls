@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Twilio.Calls.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Twilio.Calls\Soenneker.Twilio.Calls.csproj" />
     </ItemGroup>
 
     <ItemGroup>
