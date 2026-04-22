@@ -1,20 +1,19 @@
 using Soenneker.Twilio.Calls.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Twilio.Calls.Tests;
 
-[Collection("Collection")]
-public class TwilioCallsUtilTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class TwilioCallsUtilTests : HostedUnitTest
 {
     private readonly ITwilioCallsUtil _util;
 
-    public TwilioCallsUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public TwilioCallsUtilTests(Host host) : base(host)
     {
         _util = Resolve<ITwilioCallsUtil>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
