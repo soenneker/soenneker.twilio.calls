@@ -6,7 +6,7 @@ using Soenneker.Twilio.Client.Registrars;
 namespace Soenneker.Twilio.Calls.Registrars;
 
 /// <summary>
-/// A utility library for Twilio call related operations
+/// Registers Twilio call-history retrieval.
 /// </summary>
 public static class TwilioCallsUtilRegistrar
 {

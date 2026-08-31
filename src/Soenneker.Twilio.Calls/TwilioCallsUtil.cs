@@ -12,8 +12,7 @@ using System.Threading;
 
 namespace Soenneker.Twilio.Calls;
 
-/// <inheritdoc cref="ITwilioCallsUtil"/>
-public sealed class TwilioCallsUtil: ITwilioCallsUtil
+public sealed class TwilioCallsUtil : ITwilioCallsUtil
 {
     private readonly ITwilioClientUtil _twilioClientUtil;
 
@@ -26,6 +25,7 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
         CancellationToken cancellationToken = default)
     {
         await _twilioClientUtil.Init(cancellationToken).NoSync();
+        cancellationToken.ThrowIfCancellationRequested();
 
         ResourceSet<CallResource>? result = await CallResource.ReadAsync(
             to: new PhoneNumber(phoneNumber),
@@ -37,7 +37,10 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
 
         var list = new List<CallResource>();
         foreach (CallResource c in result)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
             list.Add(c);
+        }
 
         return list;
     }
@@ -51,6 +54,8 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
 
         foreach (string phoneNumber in phoneNumbers)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             ResourceSet<CallResource>? calls = await CallResource.ReadAsync(
                 to: new PhoneNumber(phoneNumber),
                 startTimeAfter: startTimeAfter?.UtcDateTime,
@@ -64,7 +69,10 @@ public sealed class TwilioCallsUtil: ITwilioCallsUtil
 
             var list = new List<CallResource>();
             foreach (CallResource c in calls)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
                 list.Add(c);
+            }
 
             callsByNumber[phoneNumber] = list;
         }

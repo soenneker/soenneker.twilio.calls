@@ -7,12 +7,12 @@ using Twilio.Rest.Api.V2010.Account;
 namespace Soenneker.Twilio.Calls.Abstract;
 
 /// <summary>
-/// A utility library for Twilio call related operations
+/// Retrieves Twilio calls by destination phone number.
 /// </summary>
 public interface ITwilioCallsUtil
 {
     /// <summary>
-    /// Gets all calls for number.
+    /// Gets all calls whose destination matches <paramref name="phoneNumber"/>.
     /// </summary>
     /// <param name="phoneNumber">The phone number.</param>
     /// <param name="startTimeAfter">The start time after.</param>
@@ -22,7 +22,7 @@ public interface ITwilioCallsUtil
     ValueTask<List<CallResource>> GetAllCallsForNumber(string phoneNumber, DateTimeOffset? startTimeAfter = null, DateTimeOffset? startTimeBefore = null, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets all calls for numbers split by number.
+    /// Gets calls for each destination number and groups them by the supplied number.
     /// </summary>
     /// <param name="phoneNumbers">The phone numbers.</param>
     /// <param name="startTimeAfter">The start time after.</param>
