@@ -45,6 +45,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Twilio.Client" Version="4.0.1224" />
+        <PackageReference Include="Soenneker.Twilio.Client" Version="4.0.1225" />
     </ItemGroup>
 </Project>
